@@ -36,7 +36,7 @@ data Result = Result { resResult :: !Text
 
 -- | Run a block of code that is to be annotated
 exec :: [FilePath -> Map Int (Text, Int, Text) -> IO ()] -- ^ printers
-     -> StateT [Result] IO ()                            -- ^ your code block
+     -> StateT [Result] IO ()                            -- ^ code to annotate
      -> IO ()
 exec printers run = do
   rs <- snd <$> runStateT run []
@@ -56,7 +56,7 @@ exec printers run = do
   where
     updateRes :: Result -> Map Int (Text, Int, Text) -> Maybe (Map Int (Text, Int, Text))
     updateRes r m = Just $
-      Map.update (\(ls, _, _) -> Just (ls, resStartCol r, resResult r)) (resEndLine r) m
+      Map.update (\(ls, _, p) -> Just (ls, resStartCol r, resResult r <> "\n" <> p)) (resEndLine r) m
 
 
 -- | Print annotated results to the terminal
