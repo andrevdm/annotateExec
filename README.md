@@ -10,7 +10,6 @@ A IHaskell notebook is a more robust alternative. However I like this approach w
 Run a block of code in an `exec` block calling `prn` or `pprn` for anything you want to see output for. Select which printers you want to use. Currently they are `printTerminal`, `printMarkdown` and `saveMarkdown`
 
 
-
 For example this code
 
 ```haskell
@@ -84,3 +83,12 @@ main = E.exec [E.printTerminal, E.saveMarkdown "./test.markdown"] $ do
 >  ] 
 ```
 -----------------------------------------------------------------------------------
+
+# GHCID
+
+You can use ghcid to run and print your annotated code as you edit it
+
+e.g. using ghcid and stack for this project's executable
+
+`stack exec -- ghcid -c "stack ghci annotateExec:lib --ghci-options='-fobject-code' --main-is annotateExec:exe:annotateExec-exe" --test=":main debug" -W`
+
