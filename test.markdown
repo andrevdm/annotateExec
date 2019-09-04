@@ -24,6 +24,7 @@ main = E.exec [E.printTerminal, E.saveMarkdown "./test.markdown"] $ do
 ```haskell
   -- Space above is retained for console output but not markdown
   let b = [1,2,3]
+  putText "not included in output"
   E.pprn $ b <> [4,5]
 ```
 
